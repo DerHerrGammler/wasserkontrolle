@@ -1,0 +1,16 @@
+// Alle Klassen die Anpassungen für Bilder beinhalten
+.background-img {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.img-fluid-h {
+    max-height: 100%;
+    width: auto;
+}
+
+.img-fluid-w {
+    height: auto;
+    max-width: 100%;
+}

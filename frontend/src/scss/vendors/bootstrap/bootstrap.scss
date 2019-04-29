@@ -1,0 +1,61 @@
+// Settings to overwrite
+    // Reboot
+$link-color: #3f51b5;
+$link-hover-color: currentColor;
+$link-hover-decoration: none;
+$label-margin-bottom: 0;
+    // Grid
+$grid-breakpoints: (
+    xs: 0, // handset portrait (small, medium, large) | handset landscape (small)
+    sm: 600px, // handset landscape (medium, large) | tablet portrait(small, large)
+    md: 1024px, //  tablet landscape (small, large)
+    lg: 1440px, // laptops and desktops
+    xl: 1920px // large desktops
+);
+$container-max-widths: (
+    sm: 570px,
+    md: 972px,
+    lg: 1296px,
+    xl: 1632px
+);
+$grid-columns: 12;
+$grid-gutter-width: 24px;
+
+
+// --- Imports functions, variables, and mixins that are needed by other Bootstrap files
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+// --- Import Roboot/Grid
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid";
+// --- Import Utils
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/utilities/align";
+// @import "~bootstrap/scss/utilities/borders";
+@import "~bootstrap/scss/utilities/clearfix";
+@import "~bootstrap/scss/utilities/display";
+@import "~bootstrap/scss/utilities/embed";
+@import "~bootstrap/scss/utilities/flex";
+@import "~bootstrap/scss/utilities/float";
+@import "~bootstrap/scss/utilities/overflow";
+@import "~bootstrap/scss/utilities/position";
+// @import "~bootstrap/scss/utilities/sizing";
+@import "~bootstrap/scss/utilities/stretched-link";
+@import "~bootstrap/scss/utilities/spacing";
+@import "~bootstrap/scss/utilities/text";
+
+
+// Settings to reset
+* {
+
+    &:active,
+    :focus {
+        outline: none !important; // 1
+    }
+}
+
+a:not(.mat-button):not(.mat-raised-button):not(.mat-fab):not(.mat-mini-fab):not([mat-list-item]) {
+    color: #3f51b5; // 2
+}

@@ -1,0 +1,8 @@
+@import "~@angular/material/theming";
+@import "~material-design-icons/iconfont/material-icons.css";
+
+// Import for Themimg and Customs
+@include mat-core();
+@import "./custom";
+@import "./mixin";
+@import "./themes";

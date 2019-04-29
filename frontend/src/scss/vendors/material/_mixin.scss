@@ -1,0 +1,16 @@
+@import "./mixins/color";
+
+// Self written functions
+@mixin material-theme($theme) {
+    @include angular-material-theme($theme);
+    @include custom();
+
+    $colors: (
+        primary: mat-color($theme, primary),
+        accent: mat-color($theme, accent),
+        warn: mat-color($theme, warn)
+    );
+
+    @include color-backgrounds($colors);
+
+}

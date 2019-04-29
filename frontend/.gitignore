@@ -1,0 +1,16 @@
+# compiled output
+/dist/*
+/src/assets/icons/mdi.svg
+/src/assets/favicons/*
+
+
+# dependencies
+/node_modules/*
+
+
+# misc
+package-lock.json
+
+
+# Not Ignored
+!**/.gitkeep

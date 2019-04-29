@@ -1,0 +1,8 @@
+@mixin color-backgrounds($colors) {
+    @each $color, $palette in $colors {
+        .bg-#{$color} {
+            background: mat-color($palette);
+            color: map-get($palette, default-contrast);
+        }
+    }
+}

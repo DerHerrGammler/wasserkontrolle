@@ -1,0 +1,23 @@
+/* TEAM */
+
+UI developer: Felix Herold
+Site: https://herold.solutions
+Twitter: DerHerrGammler
+Location: Elmshorn, Germany
+
+[...]
+
+
+/* THANKS */
+
+Name: Name oder URL
+
+[...]
+
+
+/* SITE */
+
+Last update: 2018/12/07
+Language: Deutsch
+DOCTYPE: HTML5
+IDE: Visual Studio Code

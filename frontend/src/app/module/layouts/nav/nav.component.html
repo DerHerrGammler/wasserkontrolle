@@ -1,0 +1,41 @@
+<div width="100%" style="position: fixed; top: 0; left: 0; z-index: 9999;">
+    <mat-toolbar color="primary">
+        <container>
+            <row>
+                <column xs="10">
+                    <h1 class="d-inline ml-2">Wasserkontrolle</h1>
+                    <a mat-button routerLink="/home" class="ml-2">Homepage</a>
+                    <!-- <button mat-button [matMenuTriggerFor]="menu2" class="ml-2">Pate Werden<mat-icon>arrow_drop_down</mat-icon></button>
+                        <mat-menu #menu2="matMenu" class="bg-primary">
+                            <button mat-menu-item>Action</button>
+                            <button mat-menu-item>Another Action</button>
+                            <button mat-menu-item>Something else here</button>
+                        </mat-menu> -->
+                                <!-- <button mat-button [matMenuTriggerFor]="menu3" class="ml-2">Pate Werden<mat-icon>arrow_drop_down</mat-icon></button>
+                        <mat-menu #menu3="matMenu" class="bg-primary">
+                            <button mat-menu-item>Action</button>
+                            <button mat-menu-item>Another Action</button>
+                            <button mat-menu-item>Something else here</button>
+                        </mat-menu> -->
+                </column>
+                <column xs="2">
+                    <a mat-button routerLink="/settings" class="ml-auto">Einstellungen<mat-icon svgIcon="mdi:login" inline="true"></mat-icon></a>
+                </column>
+            </row>
+        </container>
+    </mat-toolbar>
+</div>
+<div style="padding-top: 64px; min-height: 100%">
+    <router-outlet></router-outlet>
+</div>
+<footer class="bg-primary">
+    <div style="background-color: rgba(0, 0, 0, 0.2)">
+        <container class="py-2">
+            <row>
+                <column xs="12" class="text-center">
+                    <a mat-button href="https://herold.solutions">2019 &copy; Herold Solutions</a>
+                </column>
+            </row>
+        </container>
+    </div>
+</footer>

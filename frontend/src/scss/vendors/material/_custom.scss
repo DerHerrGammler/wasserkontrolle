@@ -1,0 +1,7 @@
+// Custom Änderungen die sofort geltend sind
+.mat-form-field {
+    width: 100%
+}
+
+// Custom Änderungen die vom Theme überschrieben werden würden
+@mixin custom {}

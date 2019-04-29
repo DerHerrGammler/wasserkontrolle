@@ -1,0 +1,7 @@
+// Colors
+$default-app-primary: mat-palette($mat-blue, 500);
+$default-app-accent:  mat-palette($mat-cyan, 500);
+$default-app-warn:    mat-palette($mat-red, 500);
+
+$default-app-theme: mat-light-theme($default-app-primary, $default-app-accent, $default-app-warn);
+@include material-theme($default-app-theme);

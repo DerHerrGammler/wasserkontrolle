@@ -1,0 +1,12 @@
+// Import Bootstrap - Ergänzend zu Material Design
+@import "./bootstrap/bootstrap.scss";
+
+// Import Material
+@import "./material/material.scss";
+
+// Import MDI
+@import "./mdi/mdi.scss";
+
+// Import flag-icon
+// NOTIZ: Die Icons sind beim entwickeln IMMER Square aber am ende trotzdem normal.
+@import "./flag-icon/flag-icon.scss";
