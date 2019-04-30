@@ -8,12 +8,14 @@ import * as guards from "./guards.guard";
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 import { PageHomeComponent } from "./pages/_pages";
 import { LayoutNavComponent } from "./module/layouts/nav/nav.component";
+import { ChartComponent } from "./pages/chart/chart.component";
+import { SettingsComponent } from "./pages/settings/settings.component";
 
 const routes: Routes = [
     { path: "", pathMatch: "full", redirectTo: "/home" },
     {
         path: "test",
-        component: LayoutNavComponent,
+        component: ChartComponent,
         data: {
             title: "Testing of Components"
         }
@@ -27,6 +29,13 @@ const routes: Routes = [
                 component: PageHomeComponent,
                 data: {
                     title: "Homepage"
+                }
+            },
+            {
+                path: "settings",
+                component: SettingsComponent,
+                data: {
+                    title: "Einstellungen"
                 }
             }
         ]

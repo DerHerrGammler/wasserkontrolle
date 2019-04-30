@@ -12,6 +12,7 @@ import { RouterModule } from "@angular/router";
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 import { MatIconRegistry } from "@angular/material";
 import { DomSanitizer } from "@angular/platform-browser";
+import { ChartsModule } from "ng2-charts";
 // Own 3rd Party
 import { GridModule } from "../grid/grid.module";
 import { MaterialModule } from "../material/material.module";
@@ -23,6 +24,8 @@ import { CssModule } from "../css/css.module";
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const aImports: any[] = [
     RouterModule,
+
+    ChartsModule,
 
     GridModule,
     MaterialModule,

@@ -3,5 +3,13 @@
     width: 100%
 }
 
+.mat-button-toggle {
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+}
+
 // Custom Änderungen die vom Theme überschrieben werden würden
 @mixin custom {}

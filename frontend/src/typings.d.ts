@@ -16,3 +16,5 @@ declare namespace service {
         touch: boolean;
     }
 }
+
+declare module "chartjs-plugin-annotation";

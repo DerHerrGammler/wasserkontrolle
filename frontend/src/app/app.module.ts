@@ -12,13 +12,17 @@ import { FormsModule } from "@angular/forms";
 //    Import Layouts/Components/Pipes/Directives/Providers
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 import { PageHomeComponent } from "./pages/_pages";
+import { ChartComponent } from "./pages/chart/chart.component";
+import { SettingsComponent } from "./pages/settings/settings.component";
 import { AutosizeDirective, CssSquareDirective } from "./directives/_directives";
 import { I18nPipe } from "./pipes/_pipes";
 import {  } from "./providers/_providers";
 import { ThemeService } from "./services/_services";
 
 const APP_PAGES: any[] = [
-    PageHomeComponent
+    PageHomeComponent,
+    ChartComponent,
+    SettingsComponent
 ];
 const APP_DIRECTIVES: any[] = [
     AutosizeDirective,

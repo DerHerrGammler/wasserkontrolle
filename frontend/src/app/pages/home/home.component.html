@@ -1,9 +1,104 @@
 <container class="py-2">
     <row>
-        <column xs="12" class="text-center">
-            <h2>Wasserkontrolle</h2>
-            <br>
-            <h3>Seite für die Statstiken des tollen PIs</h3>
+        <column xs=12 md=6 class="my-4">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Wassertemperatur</mat-card-title>
+                    <div class="flex"></div>
+                    <button mat-button (click)="loadTemp()">
+                        <mat-icon svgIcon="mdi:reload" inline="true"></mat-icon>
+                    </button>
+                </mat-card-header>
+                <mat-card-content>
+                    <row>
+                        <column xs=12 class="my-2">
+                            <mat-divider></mat-divider>
+                        </column>
+                        <column xs="12" class="text-center">
+                            <row>
+                                <column xs=12>
+                                    <span class="mat-display-3">{{ nowTemp }} °C</span>
+                                </column>
+                                <column xs=12>
+                                    <span>Akuelle Wassertemperatur</span>
+                                </column>
+                            </row>
+                        </column>
+                        <column xs=12 class="my-2">
+                            <mat-divider></mat-divider>
+                        </column>
+                        <column xs="12">
+                            <mat-button-toggle-group [(value)]="requestTemp.intervall" width="100%" (change)="loadTemp()">
+                                <mat-button-toggle value="day">Tag</mat-button-toggle>
+                                <mat-button-toggle value="week">Woche</mat-button-toggle>
+                                <mat-button-toggle value="month">Monat</mat-button-toggle>
+                                <mat-button-toggle value="year">Jahr</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </column>
+                        <column xs="12" class="mt-2">
+                            <ng-container *ngIf="isloadTemp">
+                                <mat-spinner class="mx-auto my-4"></mat-spinner>
+                            </ng-container>
+                            <ng-container *ngIf="!isloadTemp">
+                                <canvas baseChart width="500" height="300" [datasets]="dataTemp" [labels]="labelTemp" [options]="chartOptions" [colors]="chartColor" [legend]="false" chartType="line"></canvas>
+                            </ng-container>
+                        </column>
+                    </row>
+                </mat-card-content>
+                <!-- <mat-card-footer>
+                    {{ requestTemp | json }}
+                </mat-card-footer> -->
+            </mat-card>
+        </column>
+        <column xs=12 md=6 class="my-4">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Wasserstand</mat-card-title>
+                    <div class="flex"></div>
+                    <button mat-button (click)="loadHeight()">
+                        <mat-icon svgIcon="mdi:reload" inline="true"></mat-icon>
+                    </button>
+                </mat-card-header>
+                <mat-card-content>
+                    <row>
+                            <column xs=12 class="my-2">
+                                <mat-divider></mat-divider>
+                            </column>
+                            <column xs="12" class="text-center">
+                                <row>
+                                    <column xs=12>
+                                        <span class="mat-display-3">{{ nowHeight }} cm</span>
+                                    </column>
+                                    <column xs=12>
+                                        <span>Akueller Wasserstand</span>
+                                    </column>
+                                </row>
+                            </column>
+                            <column xs=12 class="my-2">
+                                <mat-divider></mat-divider>
+                            </column>
+                        <column xs="12">
+                            <mat-button-toggle-group [(value)]="requestHeight.intervall" width="100%" (change)="loadHeight()">
+                                <mat-button-toggle value="day">Tag</mat-button-toggle>
+                                <mat-button-toggle value="week">Woche</mat-button-toggle>
+                                <mat-button-toggle value="month">Monat</mat-button-toggle>
+                                <mat-button-toggle value="year">Jahr</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </column>
+                        <column xs="12" class="mt-2">
+                            <ng-container *ngIf="isloadHeight">
+                                <mat-spinner class="mx-auto my-4"></mat-spinner>
+                            </ng-container>
+                            <ng-container *ngIf="!isloadHeight">
+                                <canvas baseChart width="500" height="300" [datasets]="dataHeight" [labels]="labelHeight" [options]="chartOptions" [colors]="chartColor" [legend]="false" chartType="line"></canvas>
+                            </ng-container>
+                        </column>
+                    </row>
+                </mat-card-content>
+                <!-- <mat-card-footer>
+                    {{ requestHeight | json }}
+                </mat-card-footer> -->
+            </mat-card>
         </column>
     </row>
 </container>

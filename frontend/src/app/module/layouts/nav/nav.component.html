@@ -2,7 +2,7 @@
     <mat-toolbar color="primary">
         <container>
             <row>
-                <column xs="10">
+                <column xs="12" md="10">
                     <h1 class="d-inline ml-2">Wasserkontrolle</h1>
                     <a mat-button routerLink="/home" class="ml-2">Homepage</a>
                     <!-- <button mat-button [matMenuTriggerFor]="menu2" class="ml-2">Pate Werden<mat-icon>arrow_drop_down</mat-icon></button>
@@ -11,15 +11,18 @@
                             <button mat-menu-item>Another Action</button>
                             <button mat-menu-item>Something else here</button>
                         </mat-menu> -->
-                                <!-- <button mat-button [matMenuTriggerFor]="menu3" class="ml-2">Pate Werden<mat-icon>arrow_drop_down</mat-icon></button>
+                    <!-- <button mat-button [matMenuTriggerFor]="menu3" class="ml-2">Pate Werden<mat-icon>arrow_drop_down</mat-icon></button>
                         <mat-menu #menu3="matMenu" class="bg-primary">
                             <button mat-menu-item>Action</button>
                             <button mat-menu-item>Another Action</button>
                             <button mat-menu-item>Something else here</button>
                         </mat-menu> -->
                 </column>
-                <column xs="2">
-                    <a mat-button routerLink="/settings" class="ml-auto">Einstellungen<mat-icon svgIcon="mdi:login" inline="true"></mat-icon></a>
+                <column xs="12" md="2">
+                    <a mat-button routerLink="/settings" class="ml-auto">
+                        <span>Einstellungen </span>
+                        <mat-icon svgIcon="mdi:settings" inline="true"></mat-icon>
+                    </a>
                 </column>
             </row>
         </container>
