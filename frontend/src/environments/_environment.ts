@@ -15,7 +15,7 @@ export const appSettings: IappSettings = {
 };
 
 export const apiSettings: IapiSettings = {
-    main: "http://127.0.0.1/",
+    main: "http://192.168.2.208:5000/api",
     test: "https://better-bee.ml"
 };
 
