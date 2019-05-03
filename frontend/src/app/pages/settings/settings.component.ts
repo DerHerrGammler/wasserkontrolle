@@ -8,7 +8,7 @@ import { HttpService } from "../../services/_services";
 })
 export class SettingsComponent implements OnInit {
 
-    public isLogged: boolean = true;
+    public isLogged: boolean = false;
     public oUser: any = {
         username: "",
         password: ""
@@ -54,21 +54,29 @@ export class SettingsComponent implements OnInit {
         colorHeight: null,
         colorNorm: null,
         colorLow: null,
-        color: null
+        color: null,
+        valueHigh: null,
+        valueLow: null
     };
     public dataHeight: any = {
         intervall: null,
         colorHeight: null,
         colorNorm: null,
         colorLow: null,
-        color: null
+        color: null,
+        valueHigh: null,
+        valueLow: null
     };
 
     constructor(
         private readonly http: HttpService
     ) { }
 
-    public ngOnInit(): void {
+    public async ngOnInit(): Promise<void> {
+        await Promise.all([
+            this.colorTempLoad(),
+            this.colorHeightLoad()
+        ]);
     }
 
     public async login(): Promise<void> {
@@ -76,7 +84,7 @@ export class SettingsComponent implements OnInit {
             if (this.oUser.username === "admin" && this.oUser.password === "admin") {
                 this.isLogged = true;
             } else {
-                alert("Benutzername oder Passwort falsch!");
+                // alert("Benutzername oder Passwort falsch!");
             }
         } catch (oErr) {
             console.log(oErr);
@@ -86,44 +94,76 @@ export class SettingsComponent implements OnInit {
     // Funktionen für Temp
     public async saveTemp(): Promise<void> {
         try {
-            await Promise.all([
-
-            ]);
+            await this.http.put("/setting", {
+                Id: 1,
+                intervall: this.dataTemp.intervall,
+                HighColor: this.dataTemp.colorHeight,
+                MediumColor: this.dataTemp.colorNorm,
+                LowColor: this.dataTemp.colorLow,
+                HighValue: this.dataTemp.valueHigh,
+                LowValue: this.dataTemp.valueLow
+            });
         } catch (oErr) {
             console.log(oErr);
+        }
+    }
+
+    public async colorTempLoad(): Promise<void> {
+        try {
+            const data: any = await this.http.get("/RGBLedGetColor/1/");
+            this.dataTemp.color = data;
+        } catch (oErr) {
+            console.log(oErr);
+            // alert("Farbe konnte nicht geladen werden");
         }
     }
 
     public async colorTemp(): Promise<void> {
         try {
             if (this.dataTemp.color !== null) {
-                await this.http.get("/RGBLedSetColor/1/" + String(this.dataTemp.color));
+                await this.http.put("/RGBLedSetColor/1/" + String(this.dataTemp.color));
             }
         } catch (oErr) {
             console.log(oErr);
-            alert("Farbe konnte nicht gesetzt werden");
+            // alert("Farbe konnte nicht gesetzt werden");
         }
     }
 
     // Funktionen für Height
     public async saveHeight(): Promise<void> {
         try {
-            await Promise.all([
-
-            ]);
+            await this.http.put("/setting", {
+                Id: 2,
+                intervall: this.dataHeight.intervall,
+                HighColor: this.dataHeight.colorHeight,
+                MediumColor: this.dataHeight.colorNorm,
+                LowColor: this.dataHeight.colorLow,
+                HighValue: this.dataHeight.valueHigh,
+                LowValue: this.dataHeight.valueLow
+            });
         } catch (oErr) {
             console.log(oErr);
+        }
+    }
+
+    public async colorHeightLoad(): Promise<void> {
+        try {
+            const data: any = await this.http.get("/RGBLedGetColor/2/");
+            this.dataHeight.color = data;
+        } catch (oErr) {
+            console.log(oErr);
+            // alert("Farbe konnte nicht geladen werden");
         }
     }
 
     public async colorHeight(): Promise<void> {
         try {
             if (this.dataHeight.color !== null) {
-                await this.http.get("/RGBLedSetColor/2/" + String(this.dataHeight.color));
+                await this.http.put("/RGBLedSetColor/2/" + String(this.dataHeight.color));
             }
         } catch (oErr) {
             console.log(oErr);
-            alert("Farbe konnte nicht gesetzt werden");
+            // alert("Farbe konnte nicht gesetzt werden");
         }
     }
 }

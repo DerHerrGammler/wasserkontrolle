@@ -53,8 +53,22 @@
                             <column xs="12">
                                 <mat-form-field appearance="standard" color="primary">
                                     <mat-label>Messintervall in Sekunden</mat-label>
-                                    <input matInput [(ngModel)]="dataTemp.intervall" type="number">
+                                    <input matInput type="number" [(ngModel)]="dataTemp.intervall">
                                     <mat-icon matSuffix svgIcon="mdi:timer"></mat-icon>
+                                </mat-form-field>
+                            </column>
+                            <column xs="6">
+                                <mat-form-field appearance="standard" color="primary">
+                                    <mat-label>Zu hohe Temperatur</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dataTemp.valueHigh">
+                                    <mat-icon matSuffix svgIcon="mdi:arrow-collapse-up"></mat-icon>
+                                </mat-form-field>
+                            </column>
+                            <column xs="6">
+                                <mat-form-field appearance="standard" color="primary">
+                                    <mat-label>Zu niedrige Temperatur</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dataTemp.valueLow">
+                                    <mat-icon matSuffix svgIcon="mdi:arrow-collapse-down"></mat-icon>
                                 </mat-form-field>
                             </column>
                             <column xs="8">
@@ -136,8 +150,22 @@
                             <column xs="12">
                                 <mat-form-field appearance="standard" color="primary">
                                     <mat-label>Messintervall in Sekunden</mat-label>
-                                    <input matInput [(ngModel)]="dataHeight.intervall">
+                                    <input matInput type="number" [(ngModel)]="dataHeight.intervall">
                                     <mat-icon matSuffix svgIcon="mdi:timer"></mat-icon>
+                                </mat-form-field>
+                            </column>
+                            <column xs="6">
+                                <mat-form-field appearance="standard" color="primary">
+                                    <mat-label>Zu hoher Wasserstand</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dataHeight.valueHigh">
+                                    <mat-icon matSuffix svgIcon="mdi:arrow-collapse-up"></mat-icon>
+                                </mat-form-field>
+                            </column>
+                            <column xs="6">
+                                <mat-form-field appearance="standard" color="primary">
+                                    <mat-label>Zu niedriger Wasserstand</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dataHeight.valueLow">
+                                    <mat-icon matSuffix svgIcon="mdi:arrow-collapse-down"></mat-icon>
                                 </mat-form-field>
                             </column>
                             <column xs="8">
@@ -199,7 +227,7 @@
                                 <div style="width: 100%; height: 100%; border: 2px solid black;" [ngStyle]="{ 'background-color': dataHeight.color }"></div>
                             </column>
                             <column xs="4">
-                                <button mat-stroked-button color="primary" style="height: 100%; width: 100%;" (color)="colorHeight()">Ausführen</button>
+                                <button mat-stroked-button color="primary" style="height: 100%; width: 100%;" (click)="colorHeight()">Ausführen</button>
                             </column>
                         </row>
                     </mat-card-content>
