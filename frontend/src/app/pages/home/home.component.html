@@ -14,7 +14,7 @@
                         <column xs=12 class="my-2">
                             <mat-divider></mat-divider>
                         </column>
-                        <column xs="12" class="text-center">
+                        <column xs="12" class="text-center" (click)="liveTemp()">
                             <row>
                                 <column xs=12>
                                     <span class="mat-display-3">{{ nowTemp }} °C</span>
@@ -27,14 +27,15 @@
                         <column xs=12 class="my-2">
                             <mat-divider></mat-divider>
                         </column>
-                        <column xs="12">
+                        <!-- <column xs="12">
                             <mat-button-toggle-group [(value)]="requestTemp.intervall" width="100%" (change)="loadTemp()">
+                                <mat-button-toggle value="hour">Stunde</mat-button-toggle>
                                 <mat-button-toggle value="day">Tag</mat-button-toggle>
                                 <mat-button-toggle value="week">Woche</mat-button-toggle>
                                 <mat-button-toggle value="month">Monat</mat-button-toggle>
                                 <mat-button-toggle value="year">Jahr</mat-button-toggle>
                             </mat-button-toggle-group>
-                        </column>
+                        </column> -->
                         <column xs="12" class="mt-2">
                             <ng-container *ngIf="isloadTemp">
                                 <mat-spinner class="mx-auto my-4"></mat-spinner>
@@ -53,7 +54,7 @@
         <column xs=12 md=6 class="my-4">
             <mat-card>
                 <mat-card-header>
-                    <mat-card-title>Wasserstand</mat-card-title>
+                    <mat-card-title>Wasserabstand</mat-card-title>
                     <div class="flex"></div>
                     <button mat-button (click)="loadHeight()">
                         <mat-icon svgIcon="mdi:reload" inline="true"></mat-icon>
@@ -61,30 +62,31 @@
                 </mat-card-header>
                 <mat-card-content>
                     <row>
-                            <column xs=12 class="my-2">
-                                <mat-divider></mat-divider>
-                            </column>
-                            <column xs="12" class="text-center">
-                                <row>
-                                    <column xs=12>
-                                        <span class="mat-display-3">{{ nowHeight }} cm</span>
-                                    </column>
-                                    <column xs=12>
-                                        <span>Akueller Wasserstand</span>
-                                    </column>
-                                </row>
-                            </column>
-                            <column xs=12 class="my-2">
-                                <mat-divider></mat-divider>
-                            </column>
-                        <column xs="12">
+                        <column xs=12 class="my-2">
+                            <mat-divider></mat-divider>
+                        </column>
+                        <column xs="12" class="text-center" (click)="liveHeight()">
+                            <row>
+                                <column xs=12>
+                                    <span class="mat-display-3">{{ nowHeight }} cm</span>
+                                </column>
+                                <column xs=12>
+                                    <span>Akueller Wasserabstand</span>
+                                </column>
+                            </row>
+                        </column>
+                        <column xs=12 class="my-2">
+                            <mat-divider></mat-divider>
+                        </column>
+                        <!-- <column xs="12">
                             <mat-button-toggle-group [(value)]="requestHeight.intervall" width="100%" (change)="loadHeight()">
+                                <mat-button-toggle value="hour">Stunde</mat-button-toggle>
                                 <mat-button-toggle value="day">Tag</mat-button-toggle>
                                 <mat-button-toggle value="week">Woche</mat-button-toggle>
                                 <mat-button-toggle value="month">Monat</mat-button-toggle>
                                 <mat-button-toggle value="year">Jahr</mat-button-toggle>
                             </mat-button-toggle-group>
-                        </column>
+                        </column> -->
                         <column xs="12" class="mt-2">
                             <ng-container *ngIf="isloadHeight">
                                 <mat-spinner class="mx-auto my-4"></mat-spinner>
