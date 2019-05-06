@@ -25,9 +25,9 @@ namespace WaterControlApi.Controllers
     public IActionResult Get()
     {
       // List<string[]> data = new List<string[]>() { new string[] { "234.47", DateTime.UtcNow.ToString("o") }, new string[] { "145.47", DateTime.UtcNow.ToString("o") }, new string[] { "345.47", DateTime.UtcNow.ToString("o") }, };
-      var data = _context.TemperatureHistories.Select(x => new
+      var data = _context.WaterLevelHistories.Select(x => new
       {
-        p1 = x.TemperaturValue,
+        p1 = x.WaterLevelValue,
         p2 = x.TimeStamp.ToString("o")
       }).ToList();
       return new JsonResult(data.ToArray());
