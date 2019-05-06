@@ -14,7 +14,6 @@ namespace WaterControlApi.Services
     public GpioService()
     {
       Gpio = new GpioController(PinNumberingScheme.Logical);
-
     }
 
     public GpioController GetGpioControllerInstance()

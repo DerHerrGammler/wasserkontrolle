@@ -8,8 +8,8 @@ using WaterControlApi.Data;
 namespace WaterControlApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190501234630_AddConfigurationModel")]
-    partial class AddConfigurationModel
+    [Migration("20190502073312_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,6 +66,45 @@ namespace WaterControlApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RGBLeds");
+                });
+
+            modelBuilder.Entity("WaterControlApi.Models.TemperatureHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("SenesorName")
+                        .IsRequired();
+
+                    b.Property<string>("SensorId")
+                        .IsRequired();
+
+                    b.Property<double>("TemperaturValue");
+
+                    b.Property<string>("TimeStamp")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TemperatureHistories");
+                });
+
+            modelBuilder.Entity("WaterControlApi.Models.WaterLevelHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("SenesorName")
+                        .IsRequired();
+
+                    b.Property<string>("TimeStamp")
+                        .IsRequired();
+
+                    b.Property<double>("WaterLevelValue");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WaterLevelHistories");
                 });
 #pragma warning restore 612, 618
         }

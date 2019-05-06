@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WaterControlApi.Services;
 using WaterControlApi.Services.Interfaces;
+using Microsoft.AspNetCore.Cors;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WaterControlApi.Controllers
 {
+  [EnableCors("AllowOrigin")]
   [Route("api/[controller]")]
   public class UltrasonicLiveDataController : Controller
   {
@@ -26,7 +28,6 @@ namespace WaterControlApi.Controllers
     {
       //string distance = _ultrasonic.GetDistance().ToString();
       string distance = _ultrasonic.GetDistance();
-      Console.WriteLine(distance);
       return new string[] { distance };
     }
   }

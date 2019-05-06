@@ -27,7 +27,7 @@ namespace WaterControlApi
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
-    {
+    {// var abc = new History(services.BuildServiceProvider().GetService<ApplicationDbContext>());
       services.AddSingleton<IHCSR04, HCSR04>();
       services.AddSingleton<IGpioService, GpioService>();
 
@@ -35,7 +35,12 @@ namespace WaterControlApi
         options.UseMySql("Server=127.0.0.1;database=waterControl;uid=water;pwd=123;"));
 
       services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
+      services.AddCors(options =>
+        options.AddPolicy("AllowOrigin",
+          builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
+      // services.AddSingleton<IHistory, History>();
+      
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
     }
 
@@ -47,6 +52,11 @@ namespace WaterControlApi
         app.UseDeveloperExceptionPage();
       }
 
+      //app.UseCors(builder =>
+      //builder
+      //.WithOrigins("http://0.0.0.0:80")
+      //.WithMethods("PUT")
+      //);
       app.UseMvc();
     }
   }
