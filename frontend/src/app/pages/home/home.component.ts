@@ -25,7 +25,7 @@ export class PageHomeComponent implements OnInit {
         // Chart Height
     public isloadHeight: boolean = true;
     public dataHeight: ChartDataSets[] = [
-        { data: [], label: "Wasserstand" }
+        { data: [], label: "Wasserabstand" }
     ];
     public nowHeight: number = 0;
     public labelHeight: string[] = [];
@@ -56,16 +56,43 @@ export class PageHomeComponent implements OnInit {
         }
     ];
 
+    public configTemp: any = {
+        intervall: null,
+        colorHeight: null,
+        colorNorm: null,
+        colorLow: null,
+        color: null,
+        valueHigh: null,
+        valueLow: null
+    };
+    public configHeight: any = {
+        intervall: null,
+        colorHeight: null,
+        colorNorm: null,
+        colorLow: null,
+        color: null,
+        valueHigh: null,
+        valueLow: null
+    };
+
     constructor(
         public readonly router: RouterService,
         public readonly http: HttpService
     ) { }
 
     public async ngOnInit(): Promise<void> {
+        await this.loadSettings();
         await Promise.all([
             this.loadTemp(),
             this.loadHeight()
         ]);
+        // tslint:disable-next-line: no-string-literal
+        this.router.timer["live"] = setInterval(async () => {
+            await Promise.all([
+                this.liveTemp(),
+                this.liveHeight()
+            ]);
+        }, 5000);
     }
 
     // Funktionen Temp
@@ -85,6 +112,13 @@ export class PageHomeComponent implements OnInit {
         try {
             const data: any = await this.http.get("/TemperaturLiveData");
             this.nowTemp = data;
+            if (this.nowTemp >= this.configTemp.valueHigh) {
+                await this.http.put("/RGBLedSetColor/1/" + String(this.configTemp.colorHeight));
+            } else if (this.nowTemp <= this.configTemp.valueLow) {
+                await this.http.put("/RGBLedSetColor/1/" + String(this.configTemp.colorLow));
+            } else {
+                await this.http.put("/RGBLedSetColor/1/" + String(this.configTemp.colorNorm));
+            }
         } catch (oErr) {
             console.log(oErr);
             // alert("Livedaten für Wassertemperatur konnten nicht geladen werden");
@@ -99,8 +133,8 @@ export class PageHomeComponent implements OnInit {
                 time: Date;
                 values: number[];
             }[] = [];
-            data.forEach((value: string[], index: number) => {
-                const date: Date = new Date(value[1]);
+            data.forEach((value: any, index: number) => {
+                const date: Date = new Date(value.p2);
                 switch (this.requestHeight.intervall) {
                     case "hour": {
                         if (index === 0 || aData[aData.length - 1].time.getTime() + 1000 * 60 <= date.getTime()) {
@@ -115,7 +149,7 @@ export class PageHomeComponent implements OnInit {
                                 values: []
                             });
                         }
-                        aData[aData.length - 1].values.push(parseFloat(value[0]));
+                        aData[aData.length - 1].values.push(parseFloat(value.p1));
                         break;
                     }
                     case "day": {
@@ -131,7 +165,7 @@ export class PageHomeComponent implements OnInit {
                                 values: []
                             });
                         }
-                        aData[aData.length - 1].values.push(parseFloat(value[0]));
+                        aData[aData.length - 1].values.push(parseFloat(value.p1));
                         break;
                     }
                     case "week": {
@@ -160,7 +194,7 @@ export class PageHomeComponent implements OnInit {
                                 values: []
                             });
                         }
-                        aData[aData.length - 1].values.push(parseFloat(value[0]));
+                        aData[aData.length - 1].values.push(parseFloat(value.p1));
                         break;
                     }
                     case "year": {
@@ -180,8 +214,8 @@ export class PageHomeComponent implements OnInit {
                     default: {
                         aData.push({
                             value: 0,
-                            time: new Date(value[1]),
-                            values: [parseFloat(value[0])]
+                            time: new Date(value.p2),
+                            values: [parseFloat(value.p1)]
                         });
                     }
                 }
@@ -250,9 +284,16 @@ export class PageHomeComponent implements OnInit {
         try {
             const data: any = await this.http.get("/UltrasonicLiveData");
             this.nowHeight = data[0];
+            if (this.nowHeight >= this.configHeight.valueHigh) {
+                await this.http.put("/RGBLedSetColor/2/" + String(this.configHeight.colorHeight));
+            } else if (this.nowHeight <= this.configHeight.valueLow) {
+                await this.http.put("/RGBLedSetColor/2/" + String(this.configHeight.colorLow));
+            } else {
+                await this.http.put("/RGBLedSetColor/2/" + String(this.configHeight.colorNorm));
+            }
         } catch (oErr) {
             console.log(oErr);
-            // alert("Livedaten für Wasserstand konnten nicht geladen werden");
+            // alert("Livedaten für Wasserabstand konnten nicht geladen werden");
         }
     }
 
@@ -264,8 +305,8 @@ export class PageHomeComponent implements OnInit {
                 time: Date;
                 values: number[];
             }[] = [];
-            data.forEach((value: string[], index: number) => {
-                const date: Date = new Date(value[1]);
+            data.forEach((value: any, index: number) => {
+                const date: Date = new Date(value.p2);
                 switch (this.requestHeight.intervall) {
                     case "hour": {
                         if (index === 0 || aData[aData.length - 1].time.getTime() + 1000 * 60 <= date.getTime()) {
@@ -280,7 +321,7 @@ export class PageHomeComponent implements OnInit {
                                 values: []
                             });
                         }
-                        aData[aData.length - 1].values.push(parseFloat(value[0]));
+                        aData[aData.length - 1].values.push(parseFloat(value.p1));
                         break;
                     }
                     case "day": {
@@ -296,7 +337,7 @@ export class PageHomeComponent implements OnInit {
                                 values: []
                             });
                         }
-                        aData[aData.length - 1].values.push(parseFloat(value[0]));
+                        aData[aData.length - 1].values.push(parseFloat(value.p1));
                         break;
                     }
                     case "week": {
@@ -311,7 +352,7 @@ export class PageHomeComponent implements OnInit {
                                 values: []
                             });
                         }
-                        aData[aData.length - 1].values.push(parseFloat(value[0]));
+                        aData[aData.length - 1].values.push(parseFloat(value.p1));
                         break;
                     }
                     case "month": {
@@ -325,7 +366,7 @@ export class PageHomeComponent implements OnInit {
                                 values: []
                             });
                         }
-                        aData[aData.length - 1].values.push(parseFloat(value[0]));
+                        aData[aData.length - 1].values.push(parseFloat(value.p1));
                         break;
                     }
                     case "year": {
@@ -339,14 +380,14 @@ export class PageHomeComponent implements OnInit {
                                 values: []
                             });
                         }
-                        aData[aData.length - 1].values.push(parseFloat(value[0]));
+                        aData[aData.length - 1].values.push(parseFloat(value.p1));
                         break;
                     }
                     default: {
                         aData.push({
                             value: 0,
-                            time: new Date(value[1]),
-                            values: [parseFloat(value[0])]
+                            time: new Date(value.p2),
+                            values: [parseFloat(value.p1)]
                         });
                     }
                 }
@@ -394,8 +435,41 @@ export class PageHomeComponent implements OnInit {
             });
         } catch (oErr) {
             console.log(oErr);
-            // alert("Tabellendaten für Wasserstand konnten nicht geladen werden");
+            // alert("Tabellendaten für Wasserabstand konnten nicht geladen werden");
         }
     }
 
+    // BLA
+    public async loadSettings(): Promise<void> {
+        try {
+            const data: any[] = await this.http.get("/Configurations");
+            console.log(data);
+            if (data[0]) {
+                this.configTemp = {
+                    intervall: data[0].measuringIntervalTemperatur,
+                    colorHeight: data[0].highColor,
+                    colorNorm: data[0].mediumColor,
+                    colorLow: data[0].lowColor,
+                    color: this.configTemp.color,
+                    valueHigh: data[0].highValue,
+                    valueLow: data[0].lowValue
+                };
+                this.router.logTemp(data[0].measuringIntervalTemperatur);
+            }
+            if (data[1]) {
+                this.configHeight = {
+                    intervall: data[1].measuringIntervalWaterLevel,
+                    colorHeight: data[1].highColor,
+                    colorNorm: data[1].mediumColor,
+                    colorLow: data[1].lowColor,
+                    color: this.configHeight.color,
+                    valueHigh: data[1].highValue,
+                    valueLow: data[1].lowValue
+                };
+                this.router.logTemp(data[0].measuringIntervalWaterLevel);
+            }
+        } catch (oErr) {
+            console.log(oErr);
+        }
+    }
 }

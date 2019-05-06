@@ -41,18 +41,53 @@ export class RouterService {
     public data: Data = {};
     public params: Params = {};
 
+
+    public timer: any = {};
+
     constructor(
         private readonly router: Router,
         private readonly location: Location,
         private readonly pageScoll: PageScrollService,
         @Inject(DOCUMENT) private readonly document: Document,
         private readonly platform: Platform,
-        private readonly http: HttpClient
-    ) { }
+        private readonly http: HttpClient,
+        private readonly api: HttpService
+    ) {
+        this.logTemp();
+        this.logHeight();
+    }
 
     public async go(sPathIntern: string): Promise<void> {
         // this.location.go(sPathIntern);
         await this.router.navigateByUrl(sPathIntern);
+    }
+
+    public logTemp(sec: number = 10): void {
+        if (sec >= 0) {
+            sec = 10;
+        }
+        // tslint:disable-next-line: no-string-literal
+        this.timer["logTemp"] = setInterval(async () => {
+            try {
+                await this.api.put("/intervalTemp");
+            } catch (oErr) {
+                console.log(oErr);
+            }
+        }, sec * 1000);
+    }
+
+    public logHeight(sec: number = 10): void {
+        if (sec >= 0) {
+            sec = 10;
+        }
+        // tslint:disable-next-line: no-string-literal
+        this.timer["logHeight"] = setInterval(async () => {
+            try {
+                await this.api.put("/intervalWater");
+            } catch (oErr) {
+                console.log(oErr);
+            }
+        }, sec * 1000);
     }
 
     public goBack(): void {

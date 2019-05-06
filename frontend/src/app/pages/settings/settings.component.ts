@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { HttpService } from "../../services/_services";
+import { HttpService, RouterService } from "../../services/_services";
 
 @Component({
     selector: "page-settings",
@@ -69,11 +69,13 @@ export class SettingsComponent implements OnInit {
     };
 
     constructor(
-        private readonly http: HttpService
+        private readonly http: HttpService,
+        private readonly router: RouterService
     ) { }
 
     public async ngOnInit(): Promise<void> {
         await Promise.all([
+            this.loadSettings(),
             this.colorTempLoad(),
             this.colorHeightLoad()
         ]);
@@ -91,18 +93,51 @@ export class SettingsComponent implements OnInit {
         }
     }
 
+    public async loadSettings(): Promise<void> {
+        try {
+            const data: any[] = await this.http.get("/Configurations");
+            if (data[0]) {
+                this.dataTemp = {
+                    intervall: data[0].measuringIntervalTemperatur,
+                    colorHeight: data[0].highColor,
+                    colorNorm: data[0].mediumColor,
+                    colorLow: data[0].lowColor,
+                    color: this.dataTemp.color,
+                    valueHigh: data[0].highValue,
+                    valueLow: data[0].lowValue
+                };
+                this.router.logTemp(data[0].measuringIntervalTemperatur);
+            }
+            if (data[1]) {
+                this.dataHeight = {
+                    intervall: data[1].measuringIntervalWaterLevel,
+                    colorHeight: data[1].highColor,
+                    colorNorm: data[1].mediumColor,
+                    colorLow: data[1].lowColor,
+                    color: this.dataHeight.color,
+                    valueHigh: data[1].highValue,
+                    valueLow: data[1].lowValue
+                };
+                this.router.logTemp(data[1].measuringIntervalWaterLevel);
+            }
+        } catch (oErr) {
+            console.log(oErr);
+        }
+    }
+
     // Funktionen für Temp
     public async saveTemp(): Promise<void> {
         try {
-            await this.http.put("/setting", {
+            await this.http.put("/Configurations/1", {
                 Id: 1,
-                intervall: this.dataTemp.intervall,
+                measuringIntervalTemperatur: this.dataTemp.intervall,
                 HighColor: this.dataTemp.colorHeight,
                 MediumColor: this.dataTemp.colorNorm,
                 LowColor: this.dataTemp.colorLow,
                 HighValue: this.dataTemp.valueHigh,
                 LowValue: this.dataTemp.valueLow
             });
+            this.router.logTemp(this.dataTemp.intervall);
         } catch (oErr) {
             console.log(oErr);
         }
@@ -132,15 +167,16 @@ export class SettingsComponent implements OnInit {
     // Funktionen für Height
     public async saveHeight(): Promise<void> {
         try {
-            await this.http.put("/setting", {
+            await this.http.put("/Configurations/2", {
                 Id: 2,
-                intervall: this.dataHeight.intervall,
+                measuringIntervalWaterLevel: this.dataHeight.intervall,
                 HighColor: this.dataHeight.colorHeight,
                 MediumColor: this.dataHeight.colorNorm,
                 LowColor: this.dataHeight.colorLow,
                 HighValue: this.dataHeight.valueHigh,
                 LowValue: this.dataHeight.valueLow
             });
+            this.router.logHeight(this.dataHeight.intervall);
         } catch (oErr) {
             console.log(oErr);
         }

@@ -110,8 +110,8 @@
                             <column xs="4" class="pb-1">
                                 <div style="width: 100%; height: 100%; border: 2px solid black;" [ngStyle]="{ 'background-color': dataTemp.colorLow }"></div>
                             </column>
-                            <column xs="12">
-                                <button mat-raised-button color="primary" style="height: 100%; width: 100%;" (click)="saveTemp()">Speichern</button>
+                            <column xs="4" xsoffset="8" class="py-4">
+                                <button mat-raised-button color="warn" style="height: 100%; width: 100%;" (click)="saveTemp()">Speichern <mat-icon svgIcon="mdi:content-save" inline="true"></mat-icon></button>
                             </column>
                             <column xs="12" class="my-2">
                                 <mat-divider></mat-divider>
@@ -136,11 +136,11 @@
                     </mat-card-content>
                 </mat-card>
             </column>
-            <!-- Wasserstand Einstellungen -->
+            <!-- Wasserabstand Einstellungen -->
             <column xs="12" md="6" class="my-4">
                 <mat-card>
                     <mat-card-header>
-                        <mat-card-title>Einstellungen Wasserstand</mat-card-title>
+                        <mat-card-title>Einstellungen Wasserabstand</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
                         <row>
@@ -156,21 +156,21 @@
                             </column>
                             <column xs="6">
                                 <mat-form-field appearance="standard" color="primary">
-                                    <mat-label>Zu hoher Wasserstand</mat-label>
+                                    <mat-label>Zu hoher Wasserabstand</mat-label>
                                     <input matInput type="number" [(ngModel)]="dataHeight.valueHigh">
                                     <mat-icon matSuffix svgIcon="mdi:arrow-collapse-up"></mat-icon>
                                 </mat-form-field>
                             </column>
                             <column xs="6">
                                 <mat-form-field appearance="standard" color="primary">
-                                    <mat-label>Zu niedriger Wasserstand</mat-label>
+                                    <mat-label>Zu niedriger Wasserabstand</mat-label>
                                     <input matInput type="number" [(ngModel)]="dataHeight.valueLow">
                                     <mat-icon matSuffix svgIcon="mdi:arrow-collapse-down"></mat-icon>
                                 </mat-form-field>
                             </column>
                             <column xs="8">
                                 <mat-form-field appearance="standart" color="primary">
-                                    <mat-label>LED Farbe für zu hohen Wasserstand</mat-label>
+                                    <mat-label>LED Farbe für zu hohen Wasserabstand</mat-label>
                                     <mat-select [(value)]="dataHeight.colorHeight">
                                         <mat-option *ngFor="let color of ledColors" [value]="color.color" [ngStyle]="{ 'box-shadow': 'inset -100px 0px 25px 0px ' + color.color }">
                                             {{ color.label }}
@@ -183,7 +183,7 @@
                             </column>
                             <column xs="8">
                                 <mat-form-field appearance="standart" color="primary">
-                                    <mat-label>LED Farbe für richtigen Wasserstand</mat-label>
+                                    <mat-label>LED Farbe für richtigen Wasserabstand</mat-label>
                                     <mat-select [(value)]="dataHeight.colorNorm">
                                         <mat-option *ngFor="let color of ledColors" [value]="color.color" [ngStyle]="{ 'box-shadow': 'inset -100px 0px 25px 0px ' + color.color }">
                                             {{ color.label }}
@@ -196,7 +196,7 @@
                             </column>
                             <column xs="8">
                                 <mat-form-field appearance="standart" color="primary">
-                                    <mat-label>LED Farbe für zu niedrigen Wasserstand</mat-label>
+                                    <mat-label>LED Farbe für zu niedrigen Wasserabstand</mat-label>
                                     <mat-select [(value)]="dataHeight.colorLow">
                                         <mat-option *ngFor="let color of ledColors" [value]="color.color" [ngStyle]="{ 'box-shadow': 'inset -100px 0px 25px 0px ' + color.color }">
                                             {{ color.label }}
@@ -207,8 +207,8 @@
                             <column xs="4" class="pb-1">
                                 <div style="width: 100%; height: 100%; border: 2px solid black;" [ngStyle]="{ 'background-color': dataHeight.colorLow }"></div>
                             </column>
-                            <column xs="12">
-                                <button mat-raised-button color="primary" style="height: 100%; width: 100%;" (click)="saveHeight()">Speichern</button>
+                            <column xs="4" xsoffset="8" class="py-4">
+                                <button mat-raised-button color="warn" style="height: 100%; width: 100%;" (click)="saveHeight()">Speichern <mat-icon svgIcon="mdi:content-save" inline="true"></mat-icon></button>
                             </column>
                             <column xs="12" class="my-2">
                                 <mat-divider></mat-divider>
