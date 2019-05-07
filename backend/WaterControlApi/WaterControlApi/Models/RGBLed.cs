@@ -15,5 +15,7 @@ namespace WaterControlApi.Models
     public int GreenPin { get; set; }
     public int BluePin { get; set; }
 
+    public Configuration Configuration { get; set; }
+
   }
 }

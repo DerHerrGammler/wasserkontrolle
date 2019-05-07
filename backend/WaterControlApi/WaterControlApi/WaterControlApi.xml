@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WaterControlApi</name>
+    </assembly>
+    <members>
+        <member name="M:WaterControlApi.Controllers.RGBLedSetColorController.SetColor(System.String,WaterControlApi.Models.RGBLed)">
+            <summary>
+             Supported colors are red, blue, green, yellow, cyan, magenta, white.
+             Falsche Farbe schaltet die Led aus.
+            </summary>
+            <param name="color"></param>
+            <param name="led"></param>
+        </member>
+        <member name="T:WaterControlApi.Services.HCSR04">
+            <summary>
+            Service um auf den Ultraschallsensor zu zugreifen.
+            </summary>
+        </member>
+        <member name="M:WaterControlApi.Services.Interfaces.IHCSR04.GetDistance">
+            <summary>
+            Ermittel die gemessene Distanz des Ultraschallsensors
+            </summary>
+            <returns>Distanz Wert</returns>
+        </member>
+    </members>
+</doc>

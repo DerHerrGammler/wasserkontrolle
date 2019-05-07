@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WaterControlApi.Data;
 
 namespace WaterControlApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190502113522_EditConfiguration")]
+    partial class EditConfiguration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,19 +48,6 @@ namespace WaterControlApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Configurations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            HighColor = "green",
-                            HighValue = 30.5,
-                            LowColor = "red",
-                            LowValue = 5.5,
-                            MeasuringIntervalTemperatur = 5,
-                            MeasuringIntervalWaterLevel = 5,
-                            MediumColor = "yellow"
-                        });
                 });
 
             modelBuilder.Entity("WaterControlApi.Models.RGBLed", b =>
@@ -101,7 +90,8 @@ namespace WaterControlApi.Migrations
 
                     b.Property<double>("TemperaturValue");
 
-                    b.Property<DateTime>("TimeStamp");
+                    b.Property<string>("TimeStamp")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -116,7 +106,8 @@ namespace WaterControlApi.Migrations
                     b.Property<string>("SenesorName")
                         .IsRequired();
 
-                    b.Property<DateTime>("TimeStamp");
+                    b.Property<string>("TimeStamp")
+                        .IsRequired();
 
                     b.Property<double>("WaterLevelValue");
 

@@ -9,9 +9,11 @@ using WaterControlApi.Services;
 using WaterControlApi.Services.Interfaces;
 using WaterControlApi.Data;
 using WaterControlApi.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace WaterControlApi.Controllers
 {
+  [EnableCors("AllowOrigin")]
   [Route("api/[controller]")]
   [ApiController]
   public class RGBLedSetColorController : ControllerBase
@@ -26,11 +28,12 @@ namespace WaterControlApi.Controllers
     }
 
     // Put: api/RGBLedSetColor/1/green
-    [HttpPut("{id}/{color}", Name = "Put")]
-    public bool PutColor(int id, string color)
+    [HttpPut("{id}/{color}", Name = "PutColor")]
+    public IActionResult PutColor(int id, string color)
     {
       var rgbLed = _context.RGBLeds
-        .SingleOrDefault(r => r.Id == id);
+        .Where(r => r.Id == id)
+        .SingleOrDefault();
       if (rgbLed != null)
       {
         rgbLed.Color = color;
@@ -39,8 +42,10 @@ namespace WaterControlApi.Controllers
         this.SetColor(color, rgbLed);
       }
       else
-        return false;
-      return true;
+      {
+        return NotFound();
+      }
+      return Ok();
     }
 
     /// <summary>
@@ -48,9 +53,7 @@ namespace WaterControlApi.Controllers
     ///  Falsche Farbe schaltet die Led aus.
     /// </summary>
     /// <param name="color"></param>
-    /// <param name="r">pin number red</param>
-    /// <param name="g">pin number green</param>
-    /// <param name="b">pin number blue</param>
+    /// <param name="led"></param>
     private void SetColor(string color, RGBLed led)
     {
       int r = led.RedPin;
@@ -60,16 +63,25 @@ namespace WaterControlApi.Controllers
       var gpio = _gpioService.GetGpioControllerInstance();
 
       if (!gpio.IsPinOpen(r))
+      {
+        gpio.OpenPin(r);
         if (gpio.IsPinModeSupported(r, PinMode.Output))
-          gpio.OpenPin(r, PinMode.Output);
+          gpio.SetPinMode(r, PinMode.Output);
+      }
 
       if (!gpio.IsPinOpen(g))
+      {
+        gpio.OpenPin(g);
         if (gpio.IsPinModeSupported(g, PinMode.Output))
-          gpio.OpenPin(g, PinMode.Output);
+          gpio.SetPinMode(g, PinMode.Output);
+      }
 
       if (!gpio.IsPinOpen(b))
+      {
+        gpio.OpenPin(b);
         if (gpio.IsPinModeSupported(b, PinMode.Output))
-          gpio.OpenPin(b, PinMode.Output);
+          gpio.SetPinMode(b, PinMode.Output);
+      }
 
       if (color == "red")
       {
