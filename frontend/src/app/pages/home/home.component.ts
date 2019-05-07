@@ -305,6 +305,7 @@ export class PageHomeComponent implements OnInit {
                 time: Date;
                 values: number[];
             }[] = [];
+            console.log(data)
             data.forEach((value: any, index: number) => {
                 const date: Date = new Date(value.p2);
                 switch (this.requestHeight.intervall) {
@@ -397,7 +398,7 @@ export class PageHomeComponent implements OnInit {
                 value.values.forEach((num: number) => {
                     sum += num;
                 });
-                value.value = sum / value.values.length;
+                value.value = sum / value.values.length / 100;
                 return value;
             });
             this.dataHeight[0].data = [];
